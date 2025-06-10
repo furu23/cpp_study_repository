@@ -1,0 +1,53 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 디버그 메뉴에 표시될 이름입니다.
+            "name": "(gdb) ChatManageApp 디버깅 시작",
+            
+            // 디버거 종류: C/C++ 확장을 사용합니다.
+            "type": "cppdbg",
+            
+            // 'launch'는 새 프로세스를 시작하라는 의미입니다.
+            "request": "launch",
+            
+            // [매우 중요] 디버깅할 실행 파일의 경로입니다.
+            // ${workspaceFolder}는 현재 프로젝트 폴더를 의미합니다.
+            "program": "${workspaceFolder}/build/ChatManageApp.exe",
+            
+            // 프로그램에 전달할 인수가 있다면 여기에 추가합니다.
+            "args": [],
+            
+            // 디버깅 시작 시 main 함수 진입점에서 멈출지 여부입니다.
+            "stopAtEntry": false,
+            
+            // 프로그램이 실행될 작업 디렉토리입니다.
+            "cwd": "${workspaceFolder}",
+            
+            // 환경 변수가 필요하면 여기에 추가합니다.
+            "environment": [],
+            
+            // false로 설정하면 VS Code의 통합 터미널을 사용합니다.
+            "externalConsole": false,
+            
+            // 디버거 종류: MinGW를 사용하므로 gdb입니다.
+            "MIMode": "gdb",
+            
+            // [매우 중요] gdb.exe 실행 파일의 정확한 경로입니다.
+            // 이전 로그를 바탕으로 작성했으며, 만약 경로가 다르면 수정해야 합니다.
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+            
+            // 디버거의 출력을 보기 좋게 만들어 줍니다.
+            "setupCommands": [
+                {
+                    "description": "gdb에 자동 서식 지정 사용",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+
+            // [매우 중요] 디버깅을 시작하기 전에 항상 빌드를 먼저 실행합니다.
+            "preLaunchTask": "CMake: build"
+        }
+    ]
+}
