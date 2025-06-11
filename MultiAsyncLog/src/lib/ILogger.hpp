@@ -1,4 +1,6 @@
 #pragma once
+#include "ThreadSafeQueue.hpp"
+
 #include <string>
 #include <memory>
 #include <queue>
@@ -22,5 +24,5 @@
 class ILogger {
 public:
     virtual ~ILogger() = default;
-    virtual void log(const std::string& msg, std::weak_ptr<std::queue<std::string>> queueWptr) = 0;
+    virtual void log(std::string& msg, TSQueue& queue) = 0;
 };

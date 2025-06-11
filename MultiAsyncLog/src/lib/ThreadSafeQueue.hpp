@@ -13,15 +13,9 @@ private:
     std::condition_variable& cv;
     std::mutex mtx;
     bool fflag = false;
-
-         /*   std::unique_lock<std::mutex> lock(mtx);
-            cv.wait(mtx, []{ return q.empty() || fflag; });
-
-            if (fflag && !q.empty()){
-                throw std::runtime_error("SPURIOUS AWAKE OCCURED")
-            }
-                */
 public:
+    TSQueue(std::condition_variable& cv_) : cv(cv_){}
+    
     std::optional<std::string> pop(){
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, [this]{ return !raw_queue.empty() || fflag; });
@@ -31,6 +25,8 @@ public:
         }
         return std::nullopt;
     }
-    void finished(){ fflag = true; }
+
     std::size_t size() { return raw_queue.size(); }
+
+    void close(){ fflag = true; }
 };
