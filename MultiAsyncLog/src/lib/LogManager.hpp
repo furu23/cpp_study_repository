@@ -27,12 +27,21 @@ public:
     LogManager(ILogger& lpt, std::string& d)
         : logref(lpt), data(d), q(cv), writer(q){};
 
-    void pushData(const std::string& str){
+    LogManager& pushData(const std::string& str){
         std::thread writer_thread(LogWriter::writeLog, std::ref(writer));
         run();
         q.close();
         std::cout << "========Queue Closed========" << std::endl;
         cv.notify_all();
         writer_thread.join();
+        return *this;
+    }
+
+    void closeSignal(){
+        q.close();
+    }
+
+    LogManager& writeData(){
+        return *this;
     }
 };

@@ -12,6 +12,10 @@ std::unique_ptr<ILogger> SingletonLogger::instance;
 int main(){
     std::string str("TEST LOGGING");
     ILogger& logref = SingletonLogger::getInstance();
-    LogManager(logref, str);
+    LogManager manager(logref, str);
+
+    
+    manager.pushData("TEST LOGGING");
+
     return 0;
 }
